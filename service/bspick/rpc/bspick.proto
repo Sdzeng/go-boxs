@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package bspick;
+
+option go_package = "./bspick";
+
+message GetDataReq {
+  //城市
+  string city = 1;
+  //语言
+  string lan = 2;
+  //最低
+  int32  minK = 3;
+  //活跃度 1-刚刚 2-今日 3-本周 4-本月 5-其它
+  int32 active = 4;
+}
+
+message GetDataResp {
+  message Node{
+    string date = 1;
+    int32 num = 2;
+  }
+  repeated Node nodes = 1;
+}
+
+service Bspick {
+  rpc getData(GetDataReq) returns (GetDataResp);
+}
